@@ -6,13 +6,24 @@
     [matAutocomplete]="auto"
     (keyup)="$keyUp.next($event)"
   />
-  <mat-autocomplete #auto="matAutocomplete">
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    fxLayout
+    fxLayoutAlign="space-around center"
+  >
     <mat-option
-      *ngFor="let crypto of $cryptoCurrencies | async"
+      *ngFor="let crypto of filteredCrypto$ | async"
       [value]="crypto.name"
+      [routerLink]="['/favorites']"
     >
-      <span>Name: {{ crypto.name }}</span> |
-      <small> Price:{{ crypto.volume_1day_usd | currency }}</small>
+      <span fxFlex="50%">{{ crypto.name }}</span>
+      <ng-container *ngIf="crypto?.price_usd; else priceNotAvailable">
+        <small fxFlex="50%"> Price: {{ crypto.price_usd | currency }}</small>
+      </ng-container>
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>
+
+<ng-template #priceNotAvailable>
+  <small fxFlex="50%">Price is not available</small>
+</ng-template>
