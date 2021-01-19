@@ -10,9 +10,18 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ApiInterceptor } from './api.interceptor';
 
 @NgModule({
   declarations: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiInterceptor,
+      multi: true,
+    },
+  ],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -25,6 +34,7 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
     MatFormFieldModule,
     MatAutocompleteModule,
+    HttpClientModule,
   ],
   exports: [
     CommonModule,
@@ -38,6 +48,7 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
     MatFormFieldModule,
     MatAutocompleteModule,
+    HttpClientModule,
   ],
 })
 export class SharedModule {}
