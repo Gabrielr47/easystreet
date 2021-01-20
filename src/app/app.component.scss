@@ -1,3 +1,9 @@
-.logo {
-  font-size: 1.5rem;
+@import 'variables';
+
+.mat-toolbar {
+  background-color: transparent;
+  a {
+    font-size: 1.5rem;
+    color: $white;
+  }
 }
