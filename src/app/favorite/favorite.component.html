@@ -1,20 +1,27 @@
 <div
   fxLayout.xs="column"
   fxLayout="row wrap"
-  fxLayoutGap="10px"
-  ngClass.gt-xs="ml-10"
+  fxLayoutGap="2rem"
+  class="favorite"
 >
-  <mat-card
-    fxFlex.sm="0 1 calc(50%-10px)"
-    fxFlex.md="0 1 calc(33%-10px)"
-    fxFlex.gt-md="0 1 calc(25%-10px)"
-  >
-    <mat-card-title>Card 1</mat-card-title>
-    <mat-card-content
-      >Primary card content. Intended for blocks of text</mat-card-content
-    >
-    <mat-card-actions
-      >Container for buttons at the bottom of the card</mat-card-actions
+  <mat-card *ngFor="let crypto of favoriteCrypto$">
+    <mat-card-title>{{ crypto.name }}</mat-card-title>
+    <mat-card-content>
+      <ng-container *ngIf="crypto?.price_usd; else priceNotAvailable">
+        <small> Price: {{ crypto.price_usd | currency }}</small> </ng-container
+      ><br />
+      <ng-container *ngIf="crypto?.data_start">
+        <small> Initial Release Date: {{ crypto.data_start | date }}</small>
+      </ng-container>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-button color="primary">
+        <mat-icon>delete</mat-icon>
+      </button></mat-card-actions
     >
   </mat-card>
 </div>
+
+<ng-template #priceNotAvailable>
+  <small>Price is not available</small>
+</ng-template>

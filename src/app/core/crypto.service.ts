@@ -15,7 +15,7 @@ export class CryptoService {
     @Inject(LOCAL_STORAGE) private storage: StorageService
   ) {}
 
-  $getCryptoCurrencies: Observable<Assets[]> = this.http.get<Assets[]>(
+  getCryptoCurrencies$: Observable<Assets[]> = this.http.get<Assets[]>(
     'assets'
   );
 
@@ -25,5 +25,9 @@ export class CryptoService {
       current.push(crypto);
       this.storage.set(STORAGE_KEY, current);
     }
+  }
+
+  getFavoriteCryptoCurrencies(): Assets[] {
+    return this.storage.get(STORAGE_KEY);
   }
 }

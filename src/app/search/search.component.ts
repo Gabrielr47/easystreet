@@ -18,7 +18,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.filteredCrypto$ = combineLatest([
-      this.cryptoService.$getCryptoCurrencies,
+      this.cryptoService.getCryptoCurrencies$,
       this.$keyUp.pipe(
         map((event: any) => event.target.value),
         debounceTime(1000),
