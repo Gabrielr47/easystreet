@@ -33,12 +33,14 @@ export class SearchComponent implements OnInit {
     );
   }
 
-  onSelectionChange(crypto: Assets): void {
-    this.dialog.open(CryptoModalComponent, {
-      width: '400px',
-      data: {
-        crypto,
-      },
-    });
+  onSelectionChange(event: any, crypto: Assets): void {
+    if (event.source.selected) {
+      this.dialog.open(CryptoModalComponent, {
+        width: '400px',
+        data: {
+          crypto,
+        },
+      });
+    }
   }
 }

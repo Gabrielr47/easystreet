@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiInterceptor } from './api.interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [],
@@ -37,6 +38,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatAutocompleteModule,
     HttpClientModule,
     MatDialogModule,
+    MatCardModule,
   ],
   exports: [
     CommonModule,
@@ -52,6 +54,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatAutocompleteModule,
     HttpClientModule,
     MatDialogModule,
+    MatCardModule,
   ],
 })
 export class SharedModule {}

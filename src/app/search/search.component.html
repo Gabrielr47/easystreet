@@ -14,7 +14,7 @@
     <mat-option
       *ngFor="let crypto of filteredCrypto$ | async"
       [value]="crypto.name"
-      (onSelectionChange)="onSelectionChange(crypto)"
+      (onSelectionChange)="onSelectionChange($event, crypto)"
     >
       <span fxFlex="50%">{{ crypto.name }}</span>
       <ng-container *ngIf="crypto?.price_usd; else priceNotAvailable">
