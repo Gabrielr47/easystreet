@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Assets } from '../core/assets.interface';
-import { CryptoService } from '../core/crypto.service';
+import { Assets } from '@app/core/assets.interface';
+import { CryptoService } from '@app/core/crypto.service';
 
 @Component({
   selector: 'app-favorite',

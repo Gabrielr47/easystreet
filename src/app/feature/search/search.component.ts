@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { Assets } from '../core/assets.interface';
-import { CryptoService } from '../core/crypto.service';
-import { CryptoModalComponent } from '../crypto-modal/crypto-modal.component';
+import { Assets } from '@app/core/assets.interface';
+import { CryptoService } from '@app/core/crypto.service';
+import { CryptoModalComponent } from '@app/feature/crypto-modal/crypto-modal.component';
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
