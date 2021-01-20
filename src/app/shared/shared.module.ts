@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiInterceptor } from './api.interceptor';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -35,6 +36,7 @@ import { ApiInterceptor } from './api.interceptor';
     MatFormFieldModule,
     MatAutocompleteModule,
     HttpClientModule,
+    MatDialogModule,
   ],
   exports: [
     CommonModule,
@@ -49,6 +51,7 @@ import { ApiInterceptor } from './api.interceptor';
     MatFormFieldModule,
     MatAutocompleteModule,
     HttpClientModule,
+    MatDialogModule,
   ],
 })
 export class SharedModule {}

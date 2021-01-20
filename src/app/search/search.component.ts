@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Assets } from '../core/assets.interface';
 import { CryptoService } from '../core/crypto.service';
+import { CryptoModalComponent } from '../crypto-modal/crypto-modal.component';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -12,7 +14,7 @@ export class SearchComponent implements OnInit {
   public $keyUp = new Subject<KeyboardEvent>();
   filteredCrypto$: Observable<Assets[]>;
 
-  constructor(private cryptoService: CryptoService) {}
+  constructor(private cryptoService: CryptoService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.filteredCrypto$ = combineLatest([
@@ -29,5 +31,14 @@ export class SearchComponent implements OnInit {
         );
       })
     );
+  }
+
+  onSelectionChange(crypto: Assets): void {
+    this.dialog.open(CryptoModalComponent, {
+      width: '400px',
+      data: {
+        crypto,
+      },
+    });
   }
 }
