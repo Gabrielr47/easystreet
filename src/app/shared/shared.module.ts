@@ -14,6 +14,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiInterceptor } from './api.interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
@@ -39,6 +40,7 @@ import { MatCardModule } from '@angular/material/card';
     HttpClientModule,
     MatDialogModule,
     MatCardModule,
+    MatSnackBarModule,
   ],
   exports: [
     CommonModule,
@@ -55,6 +57,7 @@ import { MatCardModule } from '@angular/material/card';
     HttpClientModule,
     MatDialogModule,
     MatCardModule,
+    MatSnackBarModule,
   ],
 })
 export class SharedModule {}

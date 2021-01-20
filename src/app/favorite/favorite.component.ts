@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Assets } from '../core/assets.interface';
 import { CryptoService } from '../core/crypto.service';
 
 @Component({
@@ -6,10 +7,12 @@ import { CryptoService } from '../core/crypto.service';
   templateUrl: './favorite.component.html',
   styleUrls: ['./favorite.component.scss'],
 })
-export class FavoriteComponent implements OnInit {
-  favoriteCrypto$ = this.cryptoService.getFavoriteCryptoCurrencies();
+export class FavoriteComponent {
+  favoriteCrypto$ = this.cryptoService.getFavoriteCryptoCurrencies$;
 
   constructor(private cryptoService: CryptoService) {}
 
-  ngOnInit(): void {}
+  removeFavorite(crypto: Assets): void {
+    this.cryptoService.removeFavorite(crypto);
+  }
 }

@@ -4,7 +4,7 @@
   fxLayoutGap="2rem"
   class="favorite"
 >
-  <mat-card *ngFor="let crypto of favoriteCrypto$">
+  <mat-card *ngFor="let crypto of favoriteCrypto$ | async">
     <mat-card-title>{{ crypto.name }}</mat-card-title>
     <mat-card-content>
       <ng-container *ngIf="crypto?.price_usd; else priceNotAvailable">
@@ -15,7 +15,7 @@
       </ng-container>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-button color="primary">
+      <button mat-button (click)="removeFavorite(crypto)">
         <mat-icon>delete</mat-icon>
       </button></mat-card-actions
     >
