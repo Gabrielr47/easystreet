@@ -1,4 +1,7 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { CryptoModalComponent } from './crypto-modal.component';
 
@@ -8,9 +11,13 @@ describe('CryptoModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CryptoModalComponent ]
-    })
-    .compileComponents();
+      declarations: [CryptoModalComponent],
+      imports: [HttpClientTestingModule, MatSnackBarModule],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: [] },
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

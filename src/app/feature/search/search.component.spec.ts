@@ -1,4 +1,8 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { SearchComponent } from './search.component';
 
@@ -8,9 +12,14 @@ describe('SearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearchComponent ]
-    })
-    .compileComponents();
+      declarations: [SearchComponent],
+      imports: [
+        HttpClientTestingModule,
+        MatSnackBarModule,
+        MatDialogModule,
+        MatAutocompleteModule,
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

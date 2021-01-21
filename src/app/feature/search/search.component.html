@@ -12,7 +12,7 @@
     fxLayoutAlign="space-around center"
   >
     <mat-option
-      *ngFor="let crypto of filteredCrypto$ | async"
+      *ngFor="let crypto of filteredCrypto$ | async; trackBy: getObjectIdentity"
       [value]="crypto.name"
       (onSelectionChange)="onSelectionChange($event, crypto)"
     >

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FavoriteComponent } from './favorite.component';
 
 describe('FavoriteComponent', () => {
@@ -8,9 +9,9 @@ describe('FavoriteComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FavoriteComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientTestingModule, MatSnackBarModule],
+      declarations: [FavoriteComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

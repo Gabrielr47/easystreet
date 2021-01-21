@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { combineLatest, Observable, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+} from 'rxjs/operators';
+
 import { Assets } from '@app/core/assets.interface';
 import { CryptoService } from '@app/core/crypto.service';
 import { CryptoModalComponent } from '@app/feature/crypto-modal/crypto-modal.component';
@@ -11,28 +17,25 @@ import { CryptoModalComponent } from '@app/feature/crypto-modal/crypto-modal.com
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent {
   keyUp$ = new Subject<KeyboardEvent>();
-  filteredCrypto$: Observable<Assets[]>;
+  filteredCrypto$: Observable<Assets[]> = combineLatest([
+    this.cryptoService.cryptoCurrencies$,
+    this.keyUp$.pipe(
+      map((event: any) => event.target.value),
+      filter((term) => term.length > 1),
+      debounceTime(200),
+      distinctUntilChanged()
+    ),
+  ]).pipe(
+    map(([crypto, term]) => {
+      return crypto.filter((v) =>
+        v.name ? v.name.toLowerCase().indexOf(term.toLowerCase()) > -1 : false
+      );
+    })
+  );
 
   constructor(private cryptoService: CryptoService, public dialog: MatDialog) {}
-
-  ngOnInit(): void {
-    this.filteredCrypto$ = combineLatest([
-      this.cryptoService.cryptoCurrencies$,
-      this.keyUp$.pipe(
-        map((event: any) => event.target.value),
-        debounceTime(1000),
-        distinctUntilChanged()
-      ),
-    ]).pipe(
-      map(([crypto, term]) => {
-        return crypto.filter((v) =>
-          v.name ? v.name.toLowerCase().indexOf(term.toLowerCase()) > -1 : false
-        );
-      })
-    );
-  }
 
   onSelectionChange(event: any, crypto: Assets): void {
     if (event.source.selected) {
@@ -43,5 +46,9 @@ export class SearchComponent implements OnInit {
         },
       });
     }
+  }
+
+  getObjectIdentity(i: number, item: Assets): string {
+    return item.asset_id;
   }
 }

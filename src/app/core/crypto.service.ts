@@ -18,7 +18,7 @@ export class CryptoService {
     this.favoriteCryptoCurrencies
   );
 
-  get favoriteCryptoCurrencies(): Assets[] {
+  private get favoriteCryptoCurrencies(): Assets[] {
     return this.storage.get(STORAGE_KEY);
   }
 
@@ -52,7 +52,7 @@ export class CryptoService {
     this.cryptoMessage(crypto.name + ' was removed with success!');
   }
 
-  cryptoMessage(message: string): void {
+  private cryptoMessage(message: string): void {
     this.snackBar.open(message, 'Close', {
       duration: 3000,
       horizontalPosition: 'right',
