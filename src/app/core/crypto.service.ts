@@ -12,13 +12,15 @@ const STORAGE_KEY = 'assets';
   providedIn: 'root',
 })
 export class CryptoService {
-  getCryptoCurrencies$: Observable<Assets[]> = this.http.get<Assets[]>(
-    'assets'
+  cryptoCurrencies$: Observable<Assets[]> = this.http.get<Assets[]>('assets');
+
+  favoriteCryptoCurrencies$ = new BehaviorSubject<Assets[]>(
+    this.favoriteCryptoCurrencies
   );
 
-  getFavoriteCryptoCurrencies$ = new BehaviorSubject<Assets[]>(
-    this.getFavoriteCryptoCurrencies()
-  );
+  get favoriteCryptoCurrencies(): Assets[] {
+    return this.storage.get(STORAGE_KEY);
+  }
 
   constructor(
     private http: HttpClient,
@@ -26,31 +28,27 @@ export class CryptoService {
     private snackBar: MatSnackBar
   ) {}
 
-  getFavoriteCryptoCurrencies(): Assets[] {
-    return this.storage.get(STORAGE_KEY);
-  }
-
   addCryptoToFavorites(crypto: Assets): void {
     const current = this.storage.get(STORAGE_KEY) || [];
-    if (!current.some((c: Assets) => c.asset_id === crypto.asset_id)) {
-      current.push(crypto);
-      this.storage.set(STORAGE_KEY, current);
-      this.getFavoriteCryptoCurrencies$.next(
-        this.getFavoriteCryptoCurrencies()
-      );
-    } else {
+
+    if (current.some((c: Assets) => c.asset_id === crypto.asset_id)) {
       this.cryptoMessage(
         crypto.name + ' was already added to your list of favorites.'
       );
+      return;
     }
+
+    current.push(crypto);
+    this.storage.set(STORAGE_KEY, current);
+    this.favoriteCryptoCurrencies$.next(this.favoriteCryptoCurrencies);
   }
 
   removeFavorite(crypto: Assets): void {
-    const current = this.getFavoriteCryptoCurrencies().filter(
+    const current = this.favoriteCryptoCurrencies.filter(
       (c) => c.name !== crypto.name
     );
     this.storage.set(STORAGE_KEY, current);
-    this.getFavoriteCryptoCurrencies$.next(this.getFavoriteCryptoCurrencies());
+    this.favoriteCryptoCurrencies$.next(this.favoriteCryptoCurrencies);
     this.cryptoMessage(crypto.name + ' was removed with success!');
   }
 

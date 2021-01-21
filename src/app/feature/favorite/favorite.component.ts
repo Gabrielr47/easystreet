@@ -8,7 +8,7 @@ import { CryptoService } from '@app/core/crypto.service';
   styleUrls: ['./favorite.component.scss'],
 })
 export class FavoriteComponent {
-  favoriteCrypto$ = this.cryptoService.getFavoriteCryptoCurrencies$;
+  favoriteCrypto$ = this.cryptoService.favoriteCryptoCurrencies$;
 
   constructor(private cryptoService: CryptoService) {}
 

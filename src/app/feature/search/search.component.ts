@@ -12,15 +12,15 @@ import { CryptoModalComponent } from '@app/feature/crypto-modal/crypto-modal.com
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  public $keyUp = new Subject<KeyboardEvent>();
+  keyUp$ = new Subject<KeyboardEvent>();
   filteredCrypto$: Observable<Assets[]>;
 
   constructor(private cryptoService: CryptoService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.filteredCrypto$ = combineLatest([
-      this.cryptoService.getCryptoCurrencies$,
-      this.$keyUp.pipe(
+      this.cryptoService.cryptoCurrencies$,
+      this.keyUp$.pipe(
         map((event: any) => event.target.value),
         debounceTime(1000),
         distinctUntilChanged()

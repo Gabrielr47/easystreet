@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Assets } from '@app/core/assets.interface';
 import { CryptoService } from '@app/core/crypto.service';
@@ -8,7 +8,7 @@ import { CryptoService } from '@app/core/crypto.service';
   templateUrl: './crypto-modal.component.html',
   styleUrls: ['./crypto-modal.component.scss'],
 })
-export class CryptoModalComponent implements OnInit {
+export class CryptoModalComponent {
   constructor(
     public dialogRef: MatDialogRef<CryptoModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { crypto: Assets },
@@ -18,8 +18,6 @@ export class CryptoModalComponent implements OnInit {
   onClose(): void {
     this.dialogRef.close();
   }
-
-  ngOnInit(): void {}
 
   addCryptoToFavorites(): void {
     this.cryptoService.addCryptoToFavorites(this.data.crypto);

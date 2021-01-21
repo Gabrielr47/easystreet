@@ -4,7 +4,7 @@
     matInput
     aria-label="Cryptocurrencies"
     [matAutocomplete]="auto"
-    (keyup)="$keyUp.next($event)"
+    (keyup)="keyUp$.next($event)"
   />
   <mat-autocomplete
     #auto="matAutocomplete"
