@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  coinApiKey: 'E2552D2A-42BE-4200-BF02-F1413310724A',
-  apiEndPoint: 'https://rest-sandbox.coinapi.io/v1/',
+  coinApiKey: 'BF85DE75-D2D0-453B-968C-860A9226B4C4',
+  apiEndPoint: 'https://rest.coinapi.io/v1/',
 };
 
 /*
